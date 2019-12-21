@@ -1,27 +1,23 @@
 class BikesController < ApplicationController
-  def create
-    p 'ddddddddddddddddd'
-    render json: {"name": "John", "age": 45}
 
-    # すべてのデータベースからリクエストされたbrand_nameを検索する
-    # ↓
-    # なければ新しくbrandを生成する
-    
-#     1. 自転車登録API
-# リクエスト
-# brand_name（ブランド名）:string null: false
-# serial_number（車体番号）:string null: false
-# 仕様
-# リクエストのbrand_nameがbrandsテーブルのnameに存在する場合は、そのbrandのidをbrand_idとして、bikesテーブルに自転車情報を登録してください
-# リクエストのbrand_nameがbrandsテーブルのnameに存在しない場合は、新たなbrandとしてbrandsテーブルに登録し、bikesテーブルにも自転車情報を登録してください
-# レスポンス
-# 成功時 ステータスコード201を返す
-# 失敗時(バリデーションエラー) ステータスコード422を返す
+  def create
+    if params[:name].blank? || params[:serial_number].blank?
+      json = {status: '404 not found'}
+      render json: json and return
+    end
+
+    if Brand.find_by(name: params[:name]).nil?
+      Brand.new(name: params[:name]).save
+    end
+    brand_id = Brand.find_by(name: params[:name]).id
+    # シリアルナンバーはユニーク制約をつける
+    Bike.new(serial_number: params[:serial_number], brand_id: brand_id).save
+
+    json = {message: 'new_serial_saved!', status: '202 success'}
+    render json: json
   end
 
-  def update
-#     3. 自転車売却API
-# リクエスト
+  def update #自転車売却API
 # serial_number（車体番号）:string null: false
 # 仕様
 # リクエストのserial_numberに該当する自転車の売却日（sold_at）に、現在日時を入れてください。

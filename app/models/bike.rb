@@ -1,12 +1,14 @@
 class Bike < ApplicationRecord
-  belongs_to :brand
+  belongs_to :brand, foreign_key: "brand_id", class_name: "Brand"
+  accepts_nested_attributes_for :brand
 
   def initialize(params = {})
-    @params = params
+    @serial_number = params&.fetch(:serial_number) if  params[:serial_number].present?
+    super(params)
   end
-
-  def fetch_bike_info
-    Brand.find_by(id: @params[:id]).bikes
+  
+  def is_valid_param?
+    @serial_number.blank?
   end
 
 end

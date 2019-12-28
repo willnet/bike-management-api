@@ -15,7 +15,7 @@ class Brand < ApplicationRecord
     Brand.find_by(name: @brand_name).id
   end
 
-  def is_valid_param?
+  def is_invalid_param?
     @brand_name.blank?
   end
   

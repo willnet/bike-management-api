@@ -2,14 +2,14 @@ class BikesController < ApplicationController
 
   def create
     brand = Brand.new(brand_params)
-    if brand.is_valid_param?
+    if brand.is_invalid_param?
       json = { status: '404 not found' }
       render json: json and return
     end
     
     brand_id = brand.fetch_registered_brand_id
     bike = Bike.new(serial_number: params[:serial_number], brand_id: brand_id)
-    if bike.is_valid_param?
+    if bike.is_invalid_param?
       json = { status: '404 not found' }
       render json: json and return
     end
@@ -20,16 +20,15 @@ class BikesController < ApplicationController
     render json: json
   end
 
-  def update #自転車売却API
-    # シリアルナンバーを検索する
-    #
-  # serial_number（車体番号）:string null: false
-  # 仕様
-  # リクエストのserial_numberに該当する自転車の売却日（sold_at）に、現在日時を入れてください。
-  # レスポンス
-  # 成功時 ステータスコード200を返す
-  # 失敗時(serial_numberに該当する自転車が見つからない) ステータスコード404を返す
-  # 失敗時(DB更新時エラー) ステータスコード422を返す
+  def update
+    bike = Bike.find_by(serial_number: params[:serial_number])
+    
+    if bike.nil?
+      render json: {"presrnt": "naizo", status: '404 not found'}
+    else
+      bike.update(sold_at: Time.now)
+      render json: {"present": "aruzo", status: '202 success'}
+    end
   end
 
   private

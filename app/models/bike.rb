@@ -1,6 +1,6 @@
 class Bike < ApplicationRecord
   belongs_to :brand
-  validates :serial_number, presence: true, uniqueness: true
+  validates :serial_number, presence: true, uniqueness: { case_sensitive: true }
 
   def initialize(params = {})
     @serial_number = params&.fetch(:serial_number)

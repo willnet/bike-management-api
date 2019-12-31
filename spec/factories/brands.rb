@@ -1,10 +1,14 @@
 FactoryBot.define do
   
-  factory :giant, class: Brand do
-    name { "GIANT" }
+  factory :something_brand_name, class: Brand do
+    name { Faker::Name.name }
   end
 
-  factory :nil_brand, class: Brand do
+  factory :brand_name_is_giant, class: Brand do
+    name { 'GIANT' }
+  end
+
+  factory :nil_brand_name, class: Brand do
     name { nil }
   end
   

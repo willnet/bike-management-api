@@ -1,6 +1,9 @@
 FactoryBot.define do
-  factory :bike do
-    serial_number { "MyString" }
-    sold_at { "2019-12-14 13:51:25" }
+
+  factory :general_bike, class: Bike do
+    serial_number { "AAA" }
+    sold_at { nil }
+    association :brand, factory: :giant
   end
+
 end

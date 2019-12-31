@@ -1,9 +1,9 @@
 class Bike < ApplicationRecord
-  belongs_to :brand, foreign_key: "brand_id", class_name: "Brand"
-  accepts_nested_attributes_for :brand
+  belongs_to :brand
+  validates :serial_number, presence: true, uniqueness: true
 
   def initialize(params = {})
-    @serial_number = params&.fetch(:serial_number) if params[:serial_number].present?
+    @serial_number = params&.fetch(:serial_number)
     super(params)
   end
   

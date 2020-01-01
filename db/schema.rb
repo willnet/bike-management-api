@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 2019_12_14_045125) do
   create_table "bikes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "serial_number", null: false
     t.datetime "sold_at"
-    t.integer "brand_id", null: false
+    t.bigint "brand_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_bikes_on_brand_id"
   end
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -26,4 +27,5 @@ ActiveRecord::Schema.define(version: 2019_12_14_045125) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "bikes", "brands"
 end

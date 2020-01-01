@@ -1,5 +1,6 @@
 class Brand < ApplicationRecord
-  has_many :bikes, class_name: "Bike"
+  has_many :bikes
+  validates :name, presence: true, uniqueness: { case_sensitive: true }
 
   def initialize(params = {})
     @brand_name = params&.fetch(:name)

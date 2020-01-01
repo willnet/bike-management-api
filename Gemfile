@@ -10,8 +10,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
-  gem 'factory_bot_rails'
-  gem 'faker'
   gem 'bullet'
 end
 
@@ -21,4 +19,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', require: false
   gem 'pry-remote'
+end
+
+group :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'database_cleaner'
 end

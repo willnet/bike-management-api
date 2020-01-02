@@ -6,11 +6,12 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
-    - 'Gemfile'
     - 'lib/tasks/**'
     - 'bin/*'
     - 'test/**'
     - 'spec/spec_helper.rb'
+    - 'app/jobs/application_job.rb'
+    - 'Gemfile'
     - 'Rakefile'
     - 'config.ru'
 Style/Documentation:

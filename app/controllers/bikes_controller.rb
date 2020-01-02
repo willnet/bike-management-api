@@ -1,20 +1,13 @@
 class BikesController < ApplicationController
   def create
     brand = Brand.new(brand_params)
-    if brand.invalid_param?
-      json = { status: '404 not found' }
-      render json: json && return
-    end
-
+    response_json = { status: '422 not found' }
+    render json: response_json && return if brand.invalid_param?
     brand_id = brand.fetch_registered_brand_id
     bike = Bike.new(serial_number: params[:serial_number], brand_id: brand_id)
-    if bike.invalid_param?
-      json = { status: '404 not found' }
-      render json: json && return
-    end
-
-    json = bike.save ? { message: 'new_serial_saved!', status: '202 success' } : { message: 'not_save', status: '202 success' }
-    render json: json
+    render json: response_json && return if bike.invalid_param?
+    response_json = { status: '202 success' } if bike.save
+    render json: response_json
   end
 
   def update

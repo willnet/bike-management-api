@@ -14,7 +14,8 @@ RSpec.describe Bike, type: :model do
 
     it 'シリアルナンバーが重複している' do
       FactoryBot.create(:bike_made_by_giant)
-      expect { FactoryBot.create(:bike_made_by_giant) }.to raise_error(ActiveRecord::RecordInvalid)
+      bike = FactoryBot.build(:bike_made_by_giant)
+      expect { bike.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 end

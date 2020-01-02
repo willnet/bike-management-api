@@ -1,5 +1,4 @@
 FactoryBot.define do
-  
   factory :something_brand_name, class: Brand do
     name { Faker::Name.name }
   end
@@ -11,5 +10,4 @@ FactoryBot.define do
   factory :nil_brand_name, class: Brand do
     name { nil }
   end
-  
 end

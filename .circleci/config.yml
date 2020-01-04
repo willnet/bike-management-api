@@ -27,7 +27,7 @@ jobs:
             - vendor/bundle
       - run:
           name: wait DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+          command: dockerize -wait tcp://localhost:3000 -timeout 1m
       - run:
           name: Database Setup
           command: bin/rails db:schema:load --trace
@@ -35,7 +35,7 @@ jobs:
           name: Rubocop
           command: bundle exec rubocop
       - run:
-          name: Parallel RSpec
+          name: Run RSpec
           command: bundle exec rspec
       - store_test_results:
           path: /tmp/test-results

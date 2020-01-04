@@ -6,7 +6,7 @@ jobs:
       - image: circleci/ruby:2.6.0
         environment:
           RAILS_ENV: test
-      - image: circleci/5.7
+      - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
           MYSQL_ROOT_PASSWORD: password

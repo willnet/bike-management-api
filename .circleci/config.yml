@@ -1,3 +1,4 @@
+#  https://circleci.com/docs/ja/2.0/language-ruby/
 version: 2
 jobs:
   build:
@@ -19,16 +20,17 @@ jobs:
             - rails-demo-
       - run:
           name: Install dependencies
-          command: bundle install -j4 --path vendor/bundle
+          command: bundle check || bundle install -j4
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
       - run:
+          name: wait DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
           name: Database Setup
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:migrate
+          command: bin/rails db:schema:load --trace
       - run:
           name: Rubocop
           command: bundle exec rubocop

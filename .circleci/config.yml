@@ -28,7 +28,7 @@ jobs:
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
           name: Database Setup
-          command: bin/rails db:schema:load --trace
+          command: bundle exec bin/rails db:schema:load --trace
       - run:
           name: Run Rubocop
           command: bundle exec rubocop

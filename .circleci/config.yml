@@ -5,11 +5,13 @@ jobs:
     working_directory: ~/api
     docker:
       - image: circleci/ruby:2.6.5
+        environment:
+          RAILS_ENV: test
       - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
-          MYSQL_ROOT_PASSWORD: password
-          RAILS_ENV: test
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: db
     steps:
       - checkout
 

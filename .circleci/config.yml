@@ -11,7 +11,7 @@ jobs:
         environment:
           MYSQL_USER: root
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: db
+          MYSQL_DATABASE: api_test
     steps:
       - checkout
 

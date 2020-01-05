@@ -6,9 +6,8 @@ class Bike < ApplicationRecord
     @serial_number = params&.fetch(:serial_number)
     super(params)
   end
-  
-  def is_invalid_param?
+
+  def invalid_param?
     @serial_number.blank?
   end
-
 end

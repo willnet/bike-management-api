@@ -11,12 +11,11 @@ RSpec.describe Brand, type: :model do
       brand = FactoryBot.build(:nil_brand_name)
       expect(brand.valid?).to be(false)
     end
-    
+
     it 'ブランド名が重複してしまう' do
       # FactoryBot.create(:something_brand_name)
       # duplicate_brand = FactoryBot.build(:something_brand_name)
       # expect(duplicate_brand.valid?).to be(false)
-      # todo: データベースクリーナーの導入
     end
   end
 end

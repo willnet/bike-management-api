@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :general_bike, class: Bike do
     serial_number { Faker::IDNumber.valid }
     sold_at { nil }
@@ -17,5 +16,4 @@ FactoryBot.define do
     sold_at { nil }
     brand_id { nil }
   end
-
 end

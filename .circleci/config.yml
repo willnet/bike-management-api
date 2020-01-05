@@ -1,0 +1,37 @@
+#  https://circleci.com/docs/ja/2.0/language-ruby/
+version: 2
+jobs:
+  build:
+    working_directory: ~/api
+    docker:
+      - image: circleci/ruby:2.6.5
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: password
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - rails-demo-{{ checksum "Gemfile.lock" }}
+            - rails-demo-
+      - run:
+          name: Install dependencies
+          command: bundle check || bundle install -j4
+      - save_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Wait DB
+          command: dockerize -wait tcp://localhost:3306 -timeout 120s
+#      - run:
+#          name: Database Setup
+#          command: bundle exec bin/rails db:schema:load --trace
+#      - run:
+#          name: Run Rubocop
+#          command: bundle exec rubocop
+#      - run:
+#          name: Run RSpec
+#          command: bundle exec rspec

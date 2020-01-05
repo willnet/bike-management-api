@@ -1,5 +1,5 @@
 class Brand < ApplicationRecord
-  has_many :bikes
+  has_many :bikes, dependent: :destroy
   validates :name, presence: true, uniqueness: { case_sensitive: true }
 
   def initialize(params = {})
@@ -16,8 +16,7 @@ class Brand < ApplicationRecord
     Brand.find_by(name: @brand_name).id
   end
 
-  def is_invalid_param?
+  def invalid_param?
     @brand_name.blank?
   end
-  
 end

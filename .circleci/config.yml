@@ -29,9 +29,9 @@ jobs:
 #      - run:
 #          name: Database Setup
 #          command: bundle exec bin/rails db:schema:load --trace
-      - run:
-          name: Run Rubocop
-          command: bundle exec rubocop
-      - run:
-          name: Run RSpec
-          command: bundle exec rspec
+#      - run:
+#          name: Run Rubocop
+#          command: bundle exec rubocop
+#      - run:
+#          name: Run RSpec
+#          command: bundle exec rspec

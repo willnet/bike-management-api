@@ -24,11 +24,11 @@ jobs:
           paths:
             - vendor/bundle
       - run:
-          name: wait DB
+          name: Wait DB
           command: dockerize -wait tcp://localhost:3306 -timeout 120s
-      - run:
-          name: Database Setup
-          command: bundle exec bin/rails db:schema:load --trace
+#      - run:
+#          name: Database Setup
+#          command: bundle exec bin/rails db:schema:load --trace
       - run:
           name: Run Rubocop
           command: bundle exec rubocop

@@ -27,6 +27,9 @@ jobs:
           name: wait DB
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
       - run:
+          name: MySQL version
+          command: bundle exec ruby mysql_version.rb
+      - run:
           name: Database Setup
           command: bundle exec bin/rails db:schema:load --trace
       - run:

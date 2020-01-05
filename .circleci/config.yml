@@ -35,5 +35,3 @@ jobs:
       - run:
           name: Run RSpec
           command: bundle exec rspec
-      - store_test_results:
-          path: /tmp/test-results

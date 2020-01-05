@@ -9,7 +9,7 @@ class BrandsController < ApplicationController
         sold_at: bike[:sold_at]&.strftime("%Y年%m月%d日 %H時%M分")
       }
     end
-    render json: response
+    render json: response, status: :ok
   end
 
   private
